@@ -1126,11 +1126,9 @@ body {
 /* ==========================================================================
    RESPONSIVE OPTIMIZATION & FLUID TYPOGRAPHY OVERRIDES
    ========================================================================== */
-html, body {
-  overflow-x: hidden;
+body {
   position: relative;
   max-width: 100%;
-  width: 100%;
 }
 
 body {
