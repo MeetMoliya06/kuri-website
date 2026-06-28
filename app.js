@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   
+<<<<<<< HEAD
   // 1. Initialize Lenis Smooth Scroll
   const lenis = new Lenis({
     duration: 1.2,
@@ -35,6 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   gsap.ticker.add((time) => { lenis.raf(time * 1000); });
   gsap.ticker.lagSmoothing(0);
+=======
+  gsap.registerPlugin(ScrollTrigger);
+>>>>>>> main
 
 
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
