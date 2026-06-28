@@ -13,6 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
     infinite: false,
   });
 
+  document.querySelector('a[href="#smooth-wrapper"]').addEventListener('click', (e) => {
+  e.preventDefault();
+  lenis.scrollTo(0, { duration: 1.5 }); // Scrolls to top in 1.5 seconds
+});
+
   function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
@@ -85,6 +90,12 @@ document.addEventListener("DOMContentLoaded", () => {
     duration: 1.5,
     ease: "power3.out"
   }, "-=0.8")
+  .from('.doodle-cloche', {
+    y: -20,
+    opacity: 0,
+    duration: 1,
+    ease: "back.out(1.7)"
+  }, "-=0.5")
   .from('.mockup-offset-frame', {
     scale: 0.9,
     opacity: 0,

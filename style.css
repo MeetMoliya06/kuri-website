@@ -58,6 +58,7 @@ body {
   background-color: var(--lavender);
   color: var(--c-text-main);
   line-height: 1.6;
+  width: 100vw;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -479,6 +480,12 @@ body::-webkit-scrollbar {
   height: auto;
   z-index: 25;
   filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+  animation: float-cloche 4s ease-in-out infinite;
+}
+
+@keyframes float-cloche {
+  0%, 100% { transform: translateX(-50%) rotate(-5deg) translateY(0px); }
+  50% { transform: translateX(-50%) rotate(-5deg) translateY(-10px); }
 }
 
 .download-buttons {
@@ -541,6 +548,9 @@ body::-webkit-scrollbar {
   box-shadow: 
     0 1px 3px rgba(0, 0, 0, 0.05),
     0 15px 35px rgba(0, 0, 0, 0.15);
+
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .divider-wrapper {
@@ -562,8 +572,17 @@ body::-webkit-scrollbar {
   z-index: 10;
 }
 
+
 .features .section-title {
-  white-space: nowrap;
+  white-space: nowrap; 
+  display: inline-block;
+  max-width: 100%;
+}
+@media (max-width: 768px) {
+  .features .section-title {
+    white-space: normal; /* Force wrap on small mobile to avoid text overflow */
+    font-size: 3rem;   /* Smaller font size for mobile to help it stay compact */
+  }
 }
 
 .features-container {
@@ -712,20 +731,6 @@ body::-webkit-scrollbar {
   transform: scaleX(1); transform-origin: left;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .hero-container { grid-template-columns: 1fr; text-align: center; gap: 4rem; }
-  .hero-content p { margin: 0 auto 3rem; }
-  .download-buttons { justify-content: center; }
-  .features-container { grid-template-columns: 1fr; }
-  .footer-container { flex-direction: column; align-items: center; text-align: center; }
-}
-
-@media (max-width: 480px) {
-  .hero { padding-top: 120px; }
-  .hero-content h1 { font-size: 2.8rem; }
-  .footer-links { flex-direction: column; gap: 1rem; }
-}
 
 /* Reveal-on-scroll base state */
 .reveal { opacity: 0; transform: translateY(40px); }
@@ -745,7 +750,7 @@ body::-webkit-scrollbar {
   letter-spacing: -1.5px; line-height: 1.08; color: var(--c-ink);
 }
 .section-title .accent { color: var(--c-green); }
-.section-sub { color: var(--c-text-muted); font-size: 1.1rem; margin-top: 1.1rem; line-height: 1.6; }
+.section-sub { color: var(--c-text-muted); font-size: 1.3 em; margin-top: 1.1rem; line-height: 1.6; }
 
 /* ── Area / cuisine marquee ── */
 .marquee {
@@ -781,69 +786,188 @@ body::-webkit-scrollbar {
 }
 @keyframes scrollX { to { transform: translateX(calc(-50% - 1.25rem)); } }
 
+
+/* ── Three-axis scoring showcase (Image Accurate) ── */
+:root {
+  /* Exact colors extracted from your design */
+  --score-dark: #0A5C43;  /* The deep green */
+  --score-mint: #B7F5D3;  /* The soft mint highlight */
+  --score-text: #111827;  /* Dark text */
+  --score-muted: #6B7280; /* Grey text */
+}
+
+.scoring { 
+  position: relative; 
+  z-index: 10; 
+  width: calc(100% - 2rem);
+  max-width: 1200px; 
+  margin: 4rem auto; 
+  padding: 80px 2rem;
+  background-color: transparent; /* Forces light background */
+  border: none;
+}
+
+.scoring-grid {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; /* 2-column layout */
+  gap: 6rem; 
+  align-items: center;
+}
+
+/* Left Side - Copy */
 .scoring-copy { 
   display: flex; 
   flex-direction: column; 
+  align-items: flex-start; /* Left aligned on desktop */
+  text-align: left; 
+}
+.scoring-copy .eyebrow { 
+  background: var(--score-mint); 
+  color: var(--score-dark); 
+  box-shadow: none;
+  margin-bottom: 1.5rem; 
+}
+.scoring-copy h2 { 
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem); 
+  font-weight: 800; 
+  letter-spacing: -1.5px; 
+  line-height: 1.1; 
+  color: var(--score-text); 
+  white-space: normal;
+}
+.scoring-copy h2 .accent { 
+  color: var(--score-dark); 
+}
+.scoring-copy p { 
+  color: var(--score-muted); 
+  font-size: 1.1rem; 
+  margin: 1.25rem 0 0 0; 
+  line-height: 1.6; 
+  max-width: 460px; 
+  text-align: left; 
+}
+
+/* List Formatting */
+.scoring-points { 
+  list-style: none; 
+  margin-top: 2rem; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 1.25rem; 
+  align-items: flex-start; 
+}
+.scoring-points li { 
+  display: flex; 
   align-items: center; 
-  text-align: center; 
+  gap: 1rem; 
+  font-size: 1rem; 
+  color: var(--score-muted); 
+  font-weight: 500;
+  text-align: left; 
 }
-.scoring-copy .section-head { 
-  text-align: center; 
-  margin: 0 auto 1.5rem; 
+.scoring-points .tick {
+  flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--score-mint); color: var(--score-dark);
+  display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800;
 }
-.scoring-copy .eyebrow { margin-bottom: 1.25rem; }
-.scoring-copy h2 { font-size: clamp(2rem, 3.6vw, 2.9rem); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; color: var(--c-ink); }
-.scoring-copy h2 .accent { color: var(--c-green); }
-.scoring-copy p { color: var(--c-text-muted); font-size: 1.1rem; margin: 1.2rem auto 0; line-height: 1.7; max-width: 460px; text-align: center; }
 
-/* Centering the bullet list */
-.scoring-points { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; align-items: center; }
-.scoring-points li { display: flex; align-items: center; gap: .85rem; font-size: 1rem; color: var(--c-text-main); text-align: left; }
-
+/* Right Side - The Clean Score Card */
 .score-card {
-  background: var(--c-glass); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255,255,255,0.85); border-radius: var(--radius-lg);
-  padding: 2.75rem; box-shadow: 0 30px 60px rgba(0,0,0,0.07), inset 0 0 0 1px rgba(255,255,255,0.5);
+  background: #FFFFFF; 
+  border-radius: 24px;
+  padding: 3rem; 
+  box-shadow: 0 20px 40px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.02);
+  border: 1px solid rgba(0,0,0,0.04);
 }
-.score-card-head { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.25rem; }
-.gauge { position: relative; width: 120px; height: 120px; flex-shrink: 0; }
-.gauge svg { transform: rotate(-90deg); }
-.gauge-track { fill: none; stroke: var(--c-border); stroke-width: 11; }
+
+.score-card-head { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.5rem; }
+
+/* Gauge Settings */
+/* Gauge Settings */
+.gauge { position: relative; width: 120px; height: 120px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.gauge svg { transform: rotate(-90deg); width: 120px; height: 120px; display: block; position: absolute; top: 0; left: 0; }
+.gauge-track { fill: none; stroke: #F3F4F6; stroke-width: 9; }
 .gauge-fill {
-  fill: none; stroke: var(--c-green); stroke-width: 11; stroke-linecap: round;
+  fill: none; stroke: var(--score-dark); stroke-width: 9; stroke-linecap: round;
   stroke-dasharray: 326.7; stroke-dashoffset: 326.7;
   transition: stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1);
 }
-.is-in .gauge-fill { stroke-dashoffset: 29.4; }
-.gauge-num {
-  position: absolute; inset: 0; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
+.is-in .gauge-fill { stroke-dashoffset: 29.4; } 
+
+/* Centering the numbers perfectly */
+.gauge-num { 
+  position: relative; 
+  z-index: 2; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  /* Optical alignment tweak to perfectly center inside the ring */
+  transform: translateY(2px); 
 }
-.gauge-num strong { font-size: 2rem; font-weight: 800; color: var(--c-ink); letter-spacing: -1px; line-height: 1; }
-.gauge-num small { font-size: .65rem; text-transform: uppercase; letter-spacing: .1em; color: var(--c-text-muted); margin-top: 3px; }
-.score-card-head .meta strong { display: block; font-size: 1.15rem; color: var(--c-ink); font-weight: 800; letter-spacing: -.4px; }
-.score-card-head .meta span { font-size: .9rem; color: var(--c-text-muted); }
+.gauge-num strong { font-size: 2.2rem; font-weight: 800; color: var(--score-text); letter-spacing: -1px; line-height: 1; }
+.gauge-num small { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--score-muted); margin-top: 4px; }
+
+
+/* Meta Data & Badge */
+.score-card-head .meta { display: flex; flex-direction: column; gap: 0.35rem;}
+.score-card-head .meta strong { font-size: 1.25rem; color: var(--score-text); font-weight: 800; letter-spacing: -0.4px; }
+.score-card-head .meta .meta-subtitle { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.score-card-head .meta span { font-size: 0.9rem; color: var(--score-muted); }
 .score-card-head .meta .rank {
-  display: inline-block; margin-top: .6rem; font-size: .75rem; font-weight: 700;
-  color: var(--c-green); background: var(--c-mint); padding: .3rem .7rem; border-radius: 50px;
+  font-size: 0.75rem; font-weight: 700; color: var(--score-dark); 
+  background: var(--score-mint); padding: 0.3rem 0.7rem; border-radius: 50px;
 }
 
-.axis-row { margin-bottom: 1.4rem; }
+/* Horizontal Bars */
+.axis-row { margin-bottom: 1.5rem; }
 .axis-row:last-child { margin-bottom: 0; }
-.axis-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .55rem; }
-.axis-label .name { font-weight: 600; font-size: .95rem; color: var(--c-text-main); }
-.axis-label .val { font-weight: 800; font-size: .95rem; color: var(--c-ink); }
-.axis-track { height: 9px; background: var(--c-border); border-radius: 6px; overflow: hidden; }
-.axis-fill { height: 100%; width: 0; border-radius: 6px; transition: width 1.4s cubic-bezier(.16,1,.3,1); }
-.axis-fill.food { background: linear-gradient(90deg, var(--c-green), rgba(0,0,0,0.3)); }
-.axis-fill.amb  { background: linear-gradient(90deg, var(--c-green), var(--c-mint)); }
-.axis-fill.pres { background: linear-gradient(90deg, var(--c-ink), var(--c-text-muted)); }
+.axis-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; }
+.axis-label .name { font-weight: 600; font-size: 0.95rem; color: var(--score-text); }
+.axis-label .val { font-weight: 800; font-size: 0.95rem; color: var(--score-text); }
+.axis-track { height: 8px; background: #F3F4F6; border-radius: 8px; overflow: hidden; }
+.axis-fill { height: 100%; width: 0; border-radius: 8px; transition: width 1.4s cubic-bezier(.16,1,.3,1); }
+
+/* Exact Bar Colors from Design */
+.axis-fill.food { background: var(--score-dark); }
+.axis-fill.amb  { background: linear-gradient(90deg, #34d399, #a7f3d0); }
+.axis-fill.pres { background: #374151; }
+
 
 /* ── Gamification / badges ── */
-.levelup { position: relative; z-index: 10; padding: 80px 2rem 90px; }
+/* ── Gamification / badges ── */
+.levelup { 
+  position: relative; 
+  z-index: 10; 
+  padding: 80px 2rem 90px; 
+}
+
 .badges-grid {
-  max-width: 1120px; margin: 0 auto;
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;
+  max-width: 1120px; 
+  margin: 0 auto;
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1.75rem;
+  /* Explicitly stop stretching */
+  align-items: start; 
+}
+
+@media (max-width: 900px) {
+  .badges-grid {
+    grid-template-columns: 1fr; /* Stack vertically */
+    max-width: 420px;           
+    margin: 0 auto;             
+    padding: 0 1rem;     
+  }
+
+  .badge-card.geometric-card {
+    width: 100%;
+    margin: 0 auto;
+    /* Force internal elements to center */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 /* ── Stats band ── */
@@ -893,19 +1017,38 @@ body::-webkit-scrollbar {
 .cta-inner h2 .accent { color: var(--c-mint); }
 .cta-inner p { color: rgba(255,255,255,0.7); font-size: 1.15rem; margin: 1.2rem auto 2.5rem; max-width: 440px; text-align: center; }
 
-/* ── Responsive for new sections ── */
+
+/* ── Regal Gutter & Alternating Card Inset Layout ── */
+.features, .levelup, .cta-band, .footer {
+  width: calc(100% - 2rem); 
+  max-width: 1200px; 
+  margin: 2rem auto; 
+  border-radius: 28px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+  box-sizing: border-box;
+}
+
+/* Fix CTA padding since the parent is now controlling the width */
+.cta-band {
+  padding: 0 !important;
+}
+.cta-inner {
+  border-radius: 28px; 
+}
+
+
+/* Responsive */
 @media (max-width: 900px) {
+  .hero-container { grid-template-columns: 1fr; text-align: center; gap: 4rem; }
+  .hero-content p { margin: 0 auto 3rem; }
+  .download-buttons { justify-content: center; }
+  .features-container { grid-template-columns: 1fr; }
+  .footer-container { flex-direction: column; align-items: center; text-align: center; }
+
+  /* Hero Mobile fixes */
   .hero {
     padding: 140px 1.5rem 80px;
     text-align: center;
-  }
-  .hero-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 3.5rem;
-    width: 100%;
   }
   .hero-content {
     align-items: center;
@@ -916,21 +1059,13 @@ body::-webkit-scrollbar {
     text-align: center;
     line-height: 1.0;
   }
-  .hero-content p {
-    text-align: center;
-    margin: 0 auto 2.5rem;
-    max-width: 580px;
-  }
-  .download-buttons {
-    justify-content: center;
-  }
-
   .mockup-wrapper {
     width: 290px;
   }
   .phone-mockup-image {
     width: 290px;
     border-radius: 46px;
+
   }
   .mockup-offset-frame {
     border-radius: 46px;
@@ -942,65 +1077,38 @@ body::-webkit-scrollbar {
     top: -32px;
   }
 
-  .scoring-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .scoring-copy .section-head { text-align: center; margin-inline: auto; }
-  .scoring-copy p { margin-inline: auto; }
-  .scoring-points { max-width: 420px; margin-inline: auto; }
-  .badges-grid { grid-template-columns: 1fr; max-width: 420px; }
-  .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 0; }
-  .stat-item:nth-child(odd)::before { display: none; }
-  .stat-item:nth-child(3)::before, .stat-item:nth-child(4)::before { display: none; }
+  /* Scoring Mobile Fixes */
+  .scoring-grid { grid-template-columns: 1fr; gap: 4rem; }
+  .scoring-copy { align-items: center; text-align: center; }
+.scoring-copy p { text-align: center; margin: 1.75rem auto 0; text-align: justify; margin-bottom: 1.2rem; }
+  
+  .scoring-points { 
+    align-items: flex-start; /* Aligns the bullets perfectly to the left */
+    width: fit-content;      /* Wraps the container tightly to the text */
+    margin: 0 auto;          /* Centers the entire block on the mobile screen */
+  }
+  .scoring-points li { text-align: left; }
+  .score-card { padding: 2rem; }
 }
+
 @media (max-width: 480px) {
-  .scoring { padding-top: 70px; }
-  .cta-inner { padding: 3.5rem 1.5rem; }
-  .cta-watermark { font-size: 9rem; }
-  .stats-inner { grid-template-columns: 1fr; gap: 2rem; }
-  .stat-item::before { display: none !important; }
-}
+  .hero { padding-top: 120px; }
+  .hero-content h1 { font-size: 2.8rem; }
+  .footer-links { flex-direction: column; gap: 1rem; }
 
-/* ── Regal Gutter & Alternating Card Inset Layout ── */
-.features, .scoring, .levelup, .cta-band, .footer {
-  margin: 1.5rem;
-  border-radius: 28px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.02);
-}
-
-.features {
-  background-color: #eef0f8;
-  color: var(--ink);
-  border: none;
-}
-
-.scoring {
-  background-color: var(--purple);
-  color: var(--white);
-  padding: 100px 2rem;
-  border: 1px solid rgba(0,0,0,0.05);
-}
-.scoring h2, .scoring-copy p, .scoring-copy li {
-  color: var(--white) !important;
-}
-.scoring h2 .accent {
-  color: var(--mint) !important;
-}
-.scoring-points .tick {
-  color: var(--mint) !important;
-}
-
-.levelup {
-  background-color: var(--white);
-  color: var(--ink);
-  border: 1px solid var(--c-border);
-}
-
-.footer {
-  background-color: var(--black);
-  color: var(--white);
-  border: 1px solid rgba(255,255,255,0.05);
-}
-.footer-links a {
-  color: rgba(255, 255, 255, 0.7);
+  /* Mobile Typography Safety Net */
+  .section-title, 
+  .scoring-copy h2, 
+  .cta-inner h2 {
+    font-size: clamp(1.8rem, 8vw, 2.2rem) !important;
+    line-height: 1.15;
+  }
+  .cta-inner {
+    padding: 3.5rem 1rem !important; 
+  }
+  .cta-watermark { 
+    font-size: 6rem; 
+  }
 }
 
 /* Tiled Cloche Pattern behind Hero Visual */
