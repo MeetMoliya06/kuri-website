@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
 
-  // 3. Magnetic Hover Effect
+  // 3. Magnetic Hover Effect (Only for Navbar/Hero Buttons now)
   if (isFinePointer) {
     document.querySelectorAll('.hover-magnetic').forEach(btn => {
       btn.addEventListener('mousemove', function(e) {
@@ -50,19 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
         gsap.to(this, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.3)' });
       });
     });
-
-    document.querySelectorAll('.hover-magnetic-subtle').forEach(card => {
-      card.addEventListener('mousemove', function(e) {
-        const rect = this.getBoundingClientRect();
-        const h = rect.width / 2;
-        const x = e.clientX - rect.left - h;
-        const y = e.clientY - rect.top - (rect.height / 2);
-        gsap.to(this, { x: x * 0.05, y: y * 0.05, duration: 0.4, ease: 'power2.out' });
-      });
-      card.addEventListener('mouseleave', function() {
-        gsap.to(this, { x: 0, y: 0, duration: 0.7, ease: 'power2.out' });
-      });
-    });
+    
+    // NOTE: Removed '.hover-magnetic-subtle' block.
+    // The new Geometric Cards use pure CSS for their bouncy hover states!
   }
 
   // 4. GSAP Entry Animations
@@ -115,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Staggered reveal for Features Grid
+  // Staggered reveal for Features Grid (Geometric Cards)
   gsap.from('.gsap-stagger-card', {
     y: 80,
     opacity: 0,
