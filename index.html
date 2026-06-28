@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kuri | Restaurant rankings made honest.</title>
+  <meta name="description" content="Build organized restaurant lists, rank your favorites, and see what Surat is eating.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading">
+
+  <!-- Ambient Background & Grain -->
+  <div class="noise-overlay"></div>
+  <div class="ambient-blob blob-1"></div>
+  <div class="ambient-blob blob-2"></div>
+  <div class="ambient-blob blob-3"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" aria-label="Main Navigation">
+    <div class="nav-container">
+      <div class="logo hover-magnetic">
+        <span class="logo-mark">k</span>
+        <span class="logo-text">kuri</span>
+      </div>
+      <a href="#download" class="btn-primary hover-magnetic">
+        <span>Get the App</span>
+        <div class="btn-glow"></div>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Smooth Scroll Wrapper for Lenis -->
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      
+      <!-- Hero Section -->
+      <main class="hero">
+        <!-- Floating Particles behind hero -->
+        <div class="particle p1"></div>
+        <div class="particle p2"></div>
+        
+        <div class="hero-container">
+          
+          <!-- Hero Content -->
+          <div class="hero-content">
+            <h1 class="split-text">Restaurant rankings made honest.</h1>
+            <p class="gsap-fade-up">Build organized restaurant lists of everywhere you've been and want to try, rank them across food, ambiance, and presentation, and see what Surat is eating.</p>
+            
+            <div class="download-buttons gsap-fade-up">
+              <a href="#" class="store-btn apple-btn hover-magnetic" id="download">
+                <div class="btn-border"></div>
+                <svg viewBox="0 0 384 512" width="24" height="24" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                <div class="btn-text">
+                  <span>Download on the</span>
+                  <strong>App Store</strong>
+                </div>
+              </a>
+              <a href="#" class="store-btn play-btn hover-magnetic">
+                <div class="btn-border"></div>
+                <svg viewBox="0 0 512 512" width="24" height="24" fill="currentColor"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
+                <div class="btn-text">
+                  <span>GET IT ON</span>
+                  <strong>Google Play</strong>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Visual (CSS Phone Mockup) -->
+          <div class="hero-visual parallax-mockup">
+            <div class="phone-mockup">
+              <div class="phone-glare"></div>
+              <div class="notch"></div>
+              <div class="screen">
+                
+                <div class="app-header">
+                  <span class="app-title">kuri</span>
+                  <div class="avatar"></div>
+                </div>
+                
+                <div class="search-bar">
+                  <span class="search-icon">⚲</span> Search Surat...
+                </div>
+                
+                <div class="feed-card card-pop">
+                  <div class="card-img"></div>
+                  <div class="card-content">
+                    <strong>Saffron Street Kitchen</strong>
+                    <p>Gujarati Thali · Adajan</p>
+                    <div class="score-row">
+                      <span class="score-pill">9.3</span>
+                      <div class="mini-bars">
+                        <div class="bar f-bar"></div>
+                        <div class="bar a-bar"></div>
+                        <div class="bar p-bar"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="feed-card card-pop delay-s">
+                  <div class="card-img img-2"></div>
+                  <div class="card-content">
+                    <strong>Kettle & Crumb</strong>
+                    <p>Cafe Plates · Vesu</p>
+                    <div class="score-row">
+                      <span class="score-pill">9.0</span>
+                      <div class="mini-bars">
+                        <div class="bar f-bar-2"></div>
+                        <div class="bar a-bar-2"></div>
+                        <div class="bar p-bar-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-bar">
+                  <div class="tab-icon active"></div>
+                  <div class="tab-icon"></div>
+                  <div class="tab-icon center">
+                    <div class="center-inner"></div>
+                  </div>
+                  <div class="tab-icon"></div>
+                  <div class="tab-icon"></div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </main>
+
+      <!-- Surat areas / cuisine ticker -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span class="marquee-item">
+            Adajan <span class="star">✦</span> Vesu <span class="star">✦</span> Piplod <span class="star">✦</span> Athwa <span class="star">✦</span> City Light <span class="star">✦</span> Ghod Dod Road <span class="star">✦</span> Pal <span class="star">✦</span> Katargam <span class="star">✦</span> Gujarati Thali <span class="star">✦</span> Surti Locho <span class="star">✦</span> Cafe Plates <span class="star">✦</span> Street Food <span class="star">✦</span>
+          </span>
+          <span class="marquee-item">
+            Adajan <span class="star">✦</span> Vesu <span class="star">✦</span> Piplod <span class="star">✦</span> Athwa <span class="star">✦</span> City Light <span class="star">✦</span> Ghod Dod Road <span class="star">✦</span> Pal <span class="star">✦</span> Katargam <span class="star">✦</span> Gujarati Thali <span class="star">✦</span> Surti Locho <span class="star">✦</span> Cafe Plates <span class="star">✦</span> Street Food <span class="star">✦</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Features Grid -->
+      <section class="features">
+        <div class="section-head reveal">
+          <span class="eyebrow">✦ Why kuri</span>
+          <h2 class="section-title">A food guide that <span class="accent">earns your trust.</span></h2>
+          <p class="section-sub">No paid placements, no fake five-stars. Just honest scores from people who actually ate there.</p>
+        </div>
+        <div class="features-container">
+
+          <div class="feature-card gsap-stagger-card hover-magnetic-subtle">
+            <div class="card-glow"></div>
+            <div class="f-icon">01</div>
+            <h3>Three-Axis Scoring</h3>
+            <p>Rank food, ambiance, and presentation independently. Our algorithm filters out the noise to give you honest scores.</p>
+          </div>
+
+          <div class="feature-card gsap-stagger-card hover-magnetic-subtle">
+            <div class="card-glow"></div>
+            <div class="f-icon">02</div>
+            <h3>Live Community Feed</h3>
+            <p>See exactly what Surat is eating right now. Discover hidden gems before they trend.</p>
+          </div>
+
+          <div class="feature-card gsap-stagger-card hover-magnetic-subtle">
+            <div class="card-glow"></div>
+            <div class="f-icon">03</div>
+            <h3>Foodie Leaderboards</h3>
+            <p>Earn XP, level up your profile, and climb the local ranks by helping the city eat better.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Three-axis scoring showcase -->
+      <section class="scoring">
+        <div class="scoring-grid">
+          <div class="scoring-copy reveal">
+            <span class="eyebrow">✦ How scoring works</span>
+            <h2>One number you can <span class="accent">actually believe.</span></h2>
+            <p>Every kuri score blends three honest dimensions — then calibrates each reviewer's style, weighs recency, and filters out review bombing.</p>
+            <ul class="scoring-points">
+              <li><span class="tick">✓</span> Rate Food, Ambiance &amp; Presentation from 1–10</li>
+              <li><span class="tick">✓</span> Personal rating bias is calibrated out</li>
+              <li><span class="tick">✓</span> Fresh reviews count more than stale ones</li>
+              <li><span class="tick">✓</span> Suspicious review bursts get down-weighted</li>
+            </ul>
+          </div>
+
+          <div class="score-card reveal">
+            <div class="score-card-head">
+              <div class="gauge">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                  <circle class="gauge-track" cx="60" cy="60" r="52"></circle>
+                  <circle class="gauge-fill" cx="60" cy="60" r="52"></circle>
+                </svg>
+                <div class="gauge-num"><strong>9.3</strong><small>kuri score</small></div>
+              </div>
+              <div class="meta">
+                <strong>Saffron Street Kitchen</strong>
+                <span>Gujarati Thali · Adajan</span>
+                <span class="rank">#2 in Surat</span>
+              </div>
+            </div>
+
+            <div class="axis-row">
+              <div class="axis-label"><span class="name">🍴 Food</span><span class="val">9.6</span></div>
+              <div class="axis-track"><div class="axis-fill food" data-width="96%"></div></div>
+            </div>
+            <div class="axis-row">
+              <div class="axis-label"><span class="name">🪴 Ambiance</span><span class="val">8.8</span></div>
+              <div class="axis-track"><div class="axis-fill amb" data-width="88%"></div></div>
+            </div>
+            <div class="axis-row">
+              <div class="axis-label"><span class="name">📸 Presentation</span><span class="val">9.4</span></div>
+              <div class="axis-track"><div class="axis-fill pres" data-width="94%"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gamification / badges -->
+      <section class="levelup">
+        <div class="section-head reveal">
+          <span class="eyebrow">✦ Level up</span>
+          <h2 class="section-title">Every review makes you <span class="accent">a legend.</span></h2>
+          <p class="section-sub">Earn XP, keep your weekly streak alive, and unlock badges as you explore more of Surat.</p>
+        </div>
+        <div class="badges-grid">
+
+          <div class="badge-card reveal">
+            <div class="badge-ring">
+              <svg width="116" height="116" viewBox="0 0 116 116">
+                <circle class="ring-track" cx="58" cy="58" r="48"></circle>
+                <circle class="ring-fill g1" cx="58" cy="58" r="48" style="stroke-dashoffset: 90;"></circle>
+              </svg>
+              <div class="badge-emoji">🧭</div>
+            </div>
+            <h3>The Scout</h3>
+            <div class="role">Pioneer reviews</div>
+            <p>Be among the first to review a new spot before anyone else discovers it.</p>
+            <div class="tiers">Tiers: 5 → 15 → 50 → 100 → <b>250</b></div>
+          </div>
+
+          <div class="badge-card reveal">
+            <div class="badge-ring">
+              <svg width="116" height="116" viewBox="0 0 116 116">
+                <circle class="ring-track" cx="58" cy="58" r="48"></circle>
+                <circle class="ring-fill g2" cx="58" cy="58" r="48" style="stroke-dashoffset: 150;"></circle>
+              </svg>
+              <div class="badge-emoji">📸</div>
+            </div>
+            <h3>The Paparazzi</h3>
+            <div class="role">Photo venues</div>
+            <p>Capture the plate. Snap photos at unique venues across the whole city.</p>
+            <div class="tiers">Tiers: 5 → 25 → 100 → 250 → <b>500</b></div>
+          </div>
+
+          <div class="badge-card reveal">
+            <div class="badge-ring">
+              <svg width="116" height="116" viewBox="0 0 116 116">
+                <circle class="ring-track" cx="58" cy="58" r="48"></circle>
+                <circle class="ring-fill g3" cx="58" cy="58" r="48" style="stroke-dashoffset: 60;"></circle>
+              </svg>
+              <div class="badge-emoji">✍️</div>
+            </div>
+            <h3>The Critic</h3>
+            <div class="role">Written notes</div>
+            <p>Words matter. Leave thoughtful notes that help the community decide.</p>
+            <div class="tiers">Tiers: 10 → 50 → 200 → 500 → <b>1000</b></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Stats band -->
+      <section class="stats">
+        <div class="stats-inner reveal">
+          <div class="stat-item">
+            <div class="stat-num"><span class="count" data-target="500">0</span>+</div>
+            <div class="stat-label">Verified restaurants</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num"><span class="count" data-target="12">0</span>K+</div>
+            <div class="stat-label">Community reviews</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num"><span class="count" data-target="3">0</span></div>
+            <div class="stat-label">Scoring dimensions</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num"><span class="count" data-target="0">0</span>%</div>
+            <div class="stat-label">Paid placements</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Big CTA band -->
+      <section class="cta-band">
+        <div class="cta-inner reveal">
+          <span class="cta-watermark">kuri</span>
+          <h2>Ready to eat <span class="accent">better?</span></h2>
+          <p>Join the foodies ranking Surat one honest bite at a time.</p>
+          <div class="download-buttons">
+            <a href="#" class="store-btn hover-magnetic">
+              <div class="btn-border"></div>
+              <svg viewBox="0 0 384 512" width="24" height="24" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <div class="btn-text"><span>Download on the</span><strong>App Store</strong></div>
+            </a>
+            <a href="#" class="store-btn hover-magnetic">
+              <div class="btn-border"></div>
+              <svg viewBox="0 0 512 512" width="24" height="24" fill="currentColor"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
+              <div class="btn-text"><span>GET IT ON</span><strong>Google Play</strong></div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-container">
+          <div class="footer-left">
+            <div class="logo">
+              <span class="logo-mark">k</span>
+              <span class="logo-text">kuri</span>
+            </div>
+            <p class="copyright">© 2026 Kuri App. All rights reserved.</p>
+          </div>
+          <div class="footer-links">
+            <a href="privacy/" class="hover-underline">Privacy Policy</a>
+            <a href="terms/" class="hover-underline">Terms of Service</a>
+            <a href="help/" class="hover-underline">Help & Support</a>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+  <script src="https://unpkg.com/split-type"></script>
+  <script src="app.js"></script>
+</body>
+</html>
