@@ -172,6 +172,11 @@ document.addEventListener("DOMContentLoaded", () => {
     hamburger.setAttribute('aria-expanded', isMenuOpen);
     hamburger.classList.toggle('is-active');
     
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+      navbar.classList.toggle('menu-open', isMenuOpen);
+    }
+    
     if (isMenuOpen) {
       mobileMenu.classList.add('is-open');
       mobileMenu.setAttribute('aria-hidden', 'false');
