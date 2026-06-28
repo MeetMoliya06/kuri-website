@@ -20,7 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
   requestAnimationFrame(raf);
 
   gsap.registerPlugin(ScrollTrigger);
-  lenis.on('scroll', ScrollTrigger.update);
+  lenis.on('scroll', (e) => {
+    ScrollTrigger.update();
+    if (e.scroll > 50) {
+      document.querySelector('.navbar').classList.add('scrolled');
+    } else {
+      document.querySelector('.navbar').classList.remove('scrolled');
+    }
+  });
   gsap.ticker.add((time) => { lenis.raf(time * 1000); });
   gsap.ticker.lagSmoothing(0);
 
@@ -80,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     stagger: 0.15,
     ease: "power3.out"
   }, "-=0.6")
-  .from('.phone-mockup', {
+  .from('.phone-mockup-image', {
     y: 100,
     rotationY: 15,
     rotationX: -5,
@@ -88,14 +95,12 @@ document.addEventListener("DOMContentLoaded", () => {
     duration: 1.5,
     ease: "power3.out"
   }, "-=0.8")
-  .from('.card-pop', {
-    scale: 0.8,
+  .from('.mockup-offset-frame', {
+    scale: 0.9,
     opacity: 0,
-    y: 20,
-    duration: 0.8,
-    stagger: 0.2,
-    ease: "back.out(1.5)"
-  }, "-=0.5");
+    duration: 1,
+    ease: "power2.out"
+  }, "-=1.0");
 
   // 5. GSAP Scroll Animations
   // Parallax the phone mockup slightly on scroll
