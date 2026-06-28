@@ -265,9 +265,9 @@ body {
   max-width: 100% !important;
   position: relative;
   padding: 160px 2rem 80px;
-  background-color: var(--c-green); 
+  background-color: var(--c-green);
   color: #ffffff;
-  overflow: hidden;
+  overflow: clip;
   margin: 0;
   z-index: 10;
   min-height: 110vh;
@@ -1359,8 +1359,7 @@ img {
 
 /* OVERFLOW FIX */
 #smooth-wrapper {
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow-x: clip;
   width: 100%;
   max-width: 100%;
   position: relative;
