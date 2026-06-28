@@ -1,40 +1,57 @@
 document.addEventListener("DOMContentLoaded", () => {
   
-  // 1. Initialize Lenis Smooth Scroll
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smooth: true,
-    mouseMultiplier: 1,
-    smoothTouch: false,
-    touchMultiplier: 2,
-    infinite: false,
-  });
-
-  document.querySelector('a[href="#smooth-wrapper"]').addEventListener('click', (e) => {
-  e.preventDefault();
-  lenis.scrollTo(0, { duration: 1.5 }); // Scrolls to top in 1.5 seconds
-});
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
+  // 1. Check if Touch Device
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  let lenis = null;
 
   gsap.registerPlugin(ScrollTrigger);
-  lenis.on('scroll', (e) => {
-    ScrollTrigger.update();
-    if (e.scroll > 50) {
-      document.querySelector('.navbar').classList.add('scrolled');
+
+  if (!isTouchDevice) {
+    // Initialize Lenis Smooth Scroll (Desktop Only)
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      infinite: false,
+    });
+
+    lenis.on('scroll', (e) => {
+      ScrollTrigger.update();
+      if (e.scroll > 50) {
+        document.querySelector('.navbar').classList.add('scrolled');
+      } else {
+        document.querySelector('.navbar').classList.remove('scrolled');
+      }
+    });
+
+    // Use GSAP ticker for Lenis RAF (only once)
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    // Native Mobile Scroll Listener
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        document.querySelector('.navbar').classList.add('scrolled');
+      } else {
+        document.querySelector('.navbar').classList.remove('scrolled');
+      }
+    });
+  }
+
+  // Scroll to top listener
+  document.querySelector('a[href="#smooth-wrapper"]').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.5 });
     } else {
-      document.querySelector('.navbar').classList.remove('scrolled');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
-  gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-  gsap.ticker.lagSmoothing(0);
 
 
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
