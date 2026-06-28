@@ -81,6 +81,7 @@ body {
   z-index: 0;
   opacity: 0.4;
   animation: float 20s infinite alternate ease-in-out;
+  pointer-events: none;
 }
 .blob-1 {
   width: 40vw; height: 40vw;
@@ -114,6 +115,7 @@ body {
   background: var(--c-mint);
   z-index: 2;
   opacity: 0.6;
+  pointer-events: none;
 }
 .p1 { top: 20%; left: 15%; animation: floatP 8s infinite alternate; }
 .p2 { top: 60%; right: 20%; animation: floatP 12s infinite alternate-reverse; width: 12px; height: 12px; background: var(--c-green); opacity: 0.2; }
@@ -480,6 +482,7 @@ body {
   z-index: 25;
   filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
   animation: float-cloche 4s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes float-cloche {
@@ -538,6 +541,7 @@ body {
 
 .phone-mockup-image {
   width: 400px;
+  aspect-ratio: 1200 / 1920;
   height: auto;
   display: block;
   z-index: 2;
@@ -1245,12 +1249,14 @@ img {
   align-items: center;
   justify-content: center;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   transform: translateY(-10px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
 }
 .mobile-menu.is-open {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   transform: translateY(0);
 }
@@ -1285,6 +1291,19 @@ img {
 }
 
 @media (max-width: 768px) {
+  .mockup-wrapper,
+  .tilted-visual,
+  .phone-mockup-image {
+    touch-action: pan-y;
+  }
+  .tilted-visual {
+    transform: none !important;
+    transition: none !important;
+  }
+  .tilted-visual:hover {
+    transform: none !important;
+  }
+
   .hamburger { display: flex; justify-content: flex-end; align-items: center; margin-right: 0; }
   .desktop-btn { display: none !important; }
   

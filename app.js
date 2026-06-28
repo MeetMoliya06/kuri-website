@@ -222,6 +222,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Refresh heights when page is fully loaded (images, fonts, layout)
+  window.addEventListener('load', () => {
+    if (lenis) {
+      lenis.resize();
+    }
+    ScrollTrigger.refresh();
+  });
+
   // Remove loading class when done
   document.body.classList.remove('loading');
 
