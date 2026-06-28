@@ -47,14 +47,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Scroll to top listener
-  document.querySelector('a[href="#smooth-wrapper"]').addEventListener('click', (e) => {
-    e.preventDefault();
-    if (lenis) {
-      lenis.scrollTo(0, { duration: 1.5 });
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  });
+  const scrollTopLink = document.querySelector('a[href="#smooth-wrapper"]');
+  if (scrollTopLink) {
+    scrollTopLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (lenis) {
+        lenis.scrollTo(0, { duration: 1.5 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
 
 
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
