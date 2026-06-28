@@ -29,12 +29,30 @@
         <span class="logo-mark">k</span>
         <span class="logo-text">kuri</span>
       </a>
-      <a href="#smooth-wrapper" class="btn-primary hover-magnetic">
-        <span>Get the App</span>
-        <div class="btn-glow"></div>
-      </a>
+      <div class="nav-actions">
+        <a href="#smooth-wrapper" class="btn-primary hover-magnetic desktop-btn">
+          <span>Get the App</span>
+          <div class="btn-glow"></div>
+        </a>
+        <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+      </div>
     </div>
   </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <nav class="mobile-nav">
+        <a href="#smooth-wrapper" class="mobile-nav-link btn-primary mobile-menu-close">
+          <span>Get the App</span>
+        </a>
+      </nav>
+    </div>
+  </div>
 
   <!-- Smooth Scroll Wrapper for Lenis -->
   <div id="smooth-wrapper">

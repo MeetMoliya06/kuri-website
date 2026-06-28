@@ -161,6 +161,40 @@ document.addEventListener("DOMContentLoaded", () => {
   // Refresh once layout settles (fonts, mockup, etc.)
   ScrollTrigger.refresh();
 
+  // Mobile Menu Toggle Logic
+  const hamburger = document.querySelector('.hamburger');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  const mobileMenuCloseLinks = document.querySelectorAll('.mobile-menu-close');
+  let isMenuOpen = false;
+
+  function toggleMenu() {
+    isMenuOpen = !isMenuOpen;
+    hamburger.setAttribute('aria-expanded', isMenuOpen);
+    hamburger.classList.toggle('is-active');
+    
+    if (isMenuOpen) {
+      mobileMenu.classList.add('is-open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden'; // Lock scroll
+      if(lenis) lenis.stop(); // stop lenis scrolling
+    } else {
+      mobileMenu.classList.remove('is-open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = ''; // Unlock scroll
+      if(lenis) lenis.start(); // start lenis scrolling
+    }
+  }
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', toggleMenu);
+  }
+
+  mobileMenuCloseLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (isMenuOpen) toggleMenu();
+    });
+  });
+
   // Remove loading class when done
   document.body.classList.remove('loading');
 
