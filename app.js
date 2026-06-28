@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let lenis = null;
 
   gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({
+    ignoreMobileResize: true
+  });
 
   if (!isTouchDevice) {
     // Initialize Lenis Smooth Scroll (Desktop Only)
@@ -121,17 +124,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }, "-=1.0");
 
   // 5. GSAP Scroll Animations
-  // Parallax the phone mockup slightly on scroll
-  gsap.to('.parallax-mockup', {
-    y: -50,
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: true
-    }
-  });
+  // Parallax the phone mockup slightly on scroll (Desktop only for performance)
+  if (!isTouchDevice) {
+    gsap.to('.parallax-mockup', {
+      y: -50,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+  }
 
   // Staggered reveal for Features Grid (Geometric Cards)
   gsap.from('.gsap-stagger-card', {
