@@ -1,3 +1,4 @@
+
 # Kori App — Complete AI Project Handoff
 
 > Snapshot date: 2026-06-27 at 04:20 PM (IST)  
@@ -667,6 +668,52 @@ You are working on Kori/Kuri, an Expo SDK 54 + React Native 0.81 + Expo Router 6
 
 This document summarizes the checked-out client repository only. It does not include the remote Supabase schema, RLS policies, Edge Functions, analytics, deployment state, EAS secrets, store configuration, product requirements, or design source files. Treat database statements above as client-observed contracts until confirmed against the live project.
 
+
+## 17. Elo & Visits Refactoring Plan (Pending Implementation)
+
+A complete redesign of the backend ranking algorithm is planned (context provided in `backend.md`). The client application needs to be updated to transition from the old **Reviews & Scores** (1-10 food, ambiance, presentation) system to an **Elo-Based Visits & Comparisons** system.
+
+### 17.1 Database Changes
+- **New Tables**:
+  - `visits`: Entry point. One row per user per restaurant. Stores: user_id, restaurant_id, sentiment, notes, photo_url, dish_names.
+  - `user_rankings`: Personal ordered list. Stores: user_id, restaurant_id, category, sentiment_tier, rank_position.
+  - `ranking_comparisons`: History of comparisons. Stores: user_id, winner_id, loser_id, category, sentiment.
+  - `restaurant_elo`: Community Elo scores. Stores: restaurant_id, elo_score, comparison_count, unique_users.
+- **New Functions**:
+  - `record_comparison(user_id, winner_id, loser_id, category, sentiment)`: Called for each comparison. If sentiment is 'loved', triggers `update_elo()`.
+  - `update_elo(winner_id, loser_id, category, user_id)`: Asynchronously computes expected scores and adjusts Elo scores for both restaurants.
+  - `place_restaurant_ranking(user_id, restaurant_id, category, sentiment, position)`: Inserts a restaurant at `position` in `user_rankings`, shifting existing ones down.
+- **Updated Views & Functions**:
+  - `restaurant_leaderboard` view: Reads from `restaurant_elo` and normalizes ELO to a 1-10 display score using `PERCENT_RANK` (partitioned by category, requiring 5+ comparisons from 3+ unique users).
+  - `get_list_items()` RPC: Updated to retrieve scores from `restaurant_elo` instead of `restaurant_rankings`.
+  - `delete_user_account()` function: Updated to cascade delete from `visits`, `user_rankings`, and `ranking_comparisons`.
+
+### 17.2 Client-Side Code Updates Needed
+1. **Restaurant Detail (`app/restaurant/[id].tsx`)**:
+   - Fetch community visits from `visits` (embedding visitor profiles) instead of `reviews`.
+   - Update Kori score badge to display the normalized Elo score from `restaurant_leaderboard`.
+   - Change community review feed cards to render visit sentiment tier (Loved it / Liked it / Not Good), notes, and dishes.
+   - Sticky button "Rate this place" -> "I've been here".
+   - Subscribes to Supabase Realtime changes on the `visits` table instead of `reviews`.
+2. **Review Modal / Visit Flow (`components/ReviewModal.tsx`)**:
+   - Replace the three 1-10 component sliders (food, ambiance, presentation) with a Sentiment Selection component (Loved it / Liked it / Not Good).
+   - Maintain note inputs, dish names tags input, and photo upload.
+   - On submit, insert into the `visits` table instead of `reviews`.
+   - **Binary Search flow (Loved sentiment)**:
+     - If the user selects "Loved it", fetch the user's current ranked list (`user_rankings` ordered by `rank_position`).
+     - Prompt the user with a sequence of A-vs-B comparisons to binary search the position of the new restaurant against existing loved restaurants.
+     - Call `record_comparison()` on each comparison decision.
+     - Call `place_restaurant_ranking(position)` once the final rank position is found.
+     - Display the result (e.g. "Roman Dine ranked #2, right behind Honest, just ahead of Zaika").
+3. **Your Lists (`app/(tabs)/lists.tsx`) & List Detail (`app/list/[id].tsx`)**:
+   - Update the Been list queries to count and fetch from `visits` instead of `reviews`.
+4. **Leaderboard (`app/(tabs)/leaderboard.tsx`)**:
+   - Ensure the restaurant leaderboard tab fetches from the updated `restaurant_leaderboard` view (displaying normalized Elo 1-10 rating).
+5. **Profile (`app/(tabs)/my-list.tsx`)**:
+   - Stats card: show visit count and average Elo/rank instead of review count and average score.
+   - "My rankings": list the user's personal rankings from `user_rankings`.
+6. **Context (`context/ReviewContext.tsx`)**:
+   - Refactor context events (`notifyReviewSubmitted` -> `notifyVisitSubmitted`) and adjust estimated gamification XP calculations to follow the new rules (base visit: 10, dishes: +2 up to 6, notes: +3, photo: +5, pioneer: +15, comparison: +5).
 
 
 supabase everything

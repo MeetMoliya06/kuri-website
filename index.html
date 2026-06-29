@@ -189,49 +189,75 @@
         </div>
       </div>
 
-      <!-- Features Grid -->
+      <!-- Features Grid - Why Kuri vs Google Reviews -->
       <section class="features">
         <div class="section-head reveal">
-          <span class="eyebrow">✦ Why kuri</span>
-          <h2 class="section-title">A food guide that <span class="accent">earns your trust.</span></h2>
-          <p class="section-sub">No paid placements, no fake five-stars. Just honest scores from people who actually ate there.</p>
+          <span class="eyebrow">✦ vs Google Reviews</span>
+          <h2 class="section-title">Star ratings are <span class="accent">broken.</span></h2>
+          <p class="section-sub">As Kunal Shah noted — Indians rate 1 or 5. Nothing in between. When an average is just extremes averaged out, it tells you nothing about where to eat.</p>
         </div>
-        
-        <!-- Playful Geometric Cards -->
-         <div class="features-container">
+
+        <!-- Stats Banner -->
+        <div class="review-stat-banner reveal">
+          <div class="stat-item">
+            <span class="stat-num">56%</span>
+            <span class="stat-label">of Google reviews are 5-star</span>
+          </div>
+          <div class="stat-divider">+</div>
+          <div class="stat-item">
+            <span class="stat-num">~20%</span>
+            <span class="stat-label">are 1-star rage reviews</span>
+          </div>
+          <div class="stat-divider">=</div>
+          <div class="stat-item">
+            <span class="stat-num">~75%</span>
+            <span class="stat-label">tell you nothing useful</span>
+          </div>
+        </div>
+
+        <!-- Problem Cards -->
+        <div class="features-container">
           <div class="feature-card geometric-card gsap-stagger-card hover-magnetic-subtle">
             <div class="geo-icon">01</div>
-            <h3>Three-Axis Scoring</h3>
-            <p>Rank food, ambiance, and presentation independently. Our algorithm filters out the noise to give you honest scores.</p>
+            <h3>The Extremes Trap</h3>
+            <p>Google ratings cluster at 1 and 5 — angry customers and die-hard fans dominate. The silent majority who had a decent meal? They never rate. The average of extremes tells you nothing.</p>
           </div>
 
           <div class="feature-card geometric-card gsap-stagger-card hover-magnetic-subtle">
             <div class="geo-icon">02</div>
-            <h3>Live Community Feed</h3>
-            <p>See exactly what Surat is eating right now. Discover hidden gems before they trend.</p>
+            <h3>1 in 10 Stars Is Fake</h3>
+            <p>Google has the highest fake review rate of any platform — 10.7%. They removed 240 million policy-violating reviews in 2024 alone. You can't tell which ones you're trusting.</p>
           </div>
 
           <div class="feature-card geometric-card gsap-stagger-card hover-magnetic-subtle">
             <div class="geo-icon">03</div>
-            <h3>Foodie Leaderboards</h3>
-            <p>Earn XP, level up your profile, and climb the local ranks by helping the city eat better.</p>
+            <h3>"Free Dessert for 5 Stars"</h3>
+            <p>Restaurants openly bribe customers — free food, discounts, goodie bags — in exchange for 5-star ratings. The system is gamed. The score you see isn't earned.</p>
+          </div>
+        </div>
+
+        <!-- Kuri Fix -->
+        <div class="kuri-fix-banner reveal">
+          <div class="kuri-fix-inner">
+            <span class="kuri-fix-label">→ how kuri fixes this</span>
+            <p class="kuri-fix-text">We don't ask you to pick a number. We ask <em>"which did you enjoy more?"</em> — binary comparisons that can't be faked, gamed, or pressured. Our ELO-based ranking only surfaces restaurants that consistently win head-to-head, from real diners, over time.</p>
           </div>
         </div>
 
       </section>
 
-      <!-- Three-axis scoring showcase -->
+      <!-- Comparison-based ranking showcase -->
       <section class="scoring">
         <div class="scoring-grid">
           <div class="scoring-copy reveal">
-            <span class="eyebrow">✦ How scoring works</span>
-            <h2>One number you can <span class="accent">actually believe.</span></h2>
-            <p>Every kuri score blends three honest dimensions — then calibrates each reviewer's style, weighs recency, and filters out review bombing.</p>
+            <span class="eyebrow">✦ How ranking works</span>
+            <h2>Ranked by preference, not <span class="accent">stars.</span></h2>
+            <p>Instead of picking a number, you just tell us which restaurant you enjoyed more. Binary comparisons build rankings that are impossible to fake or game.</p>
             <ul class="scoring-points">
-              <li><span class="tick">✓</span> Rate Food, Ambiance &amp; Presentation from 1–10</li>
-              <li><span class="tick">✓</span> Personal rating bias is calibrated out</li>
-              <li><span class="tick">✓</span> Fresh reviews count more than stale ones</li>
-              <li><span class="tick">✓</span> Suspicious review bursts get down-weighted</li>
+              <li><span class="tick">✓</span> No stars — just "which did you prefer?"</li>
+              <li><span class="tick">✓</span> Binary search finds your exact rank in a few taps</li>
+              <li><span class="tick">✓</span> Every comparison updates our community ELO score</li>
+              <li><span class="tick">✓</span> Only spots with 5+ comparisons from 3+ real diners make the board</li>
             </ul>
           </div>
 
@@ -242,42 +268,196 @@
                   <circle class="gauge-track" cx="60" cy="60" r="52"></circle>
                   <circle class="gauge-fill" cx="60" cy="60" r="52"></circle>
                 </svg>
-                <div class="gauge-num"><strong>8.6</strong><small>kuri score</small></div>
+                <div class="gauge-num"><strong>9.1</strong><small>kuri score</small></div>
               </div>
               <div class="meta">
-                <strong>Saffron Street Kitchen</strong>
+                <strong>Zero</strong>
                 <div class="meta-subtitle">
-                  <span>Gujarati Thali · Adajan</span>
-                  <span class="rank">#2 in Surat</span>
+                  <span>Gujarati · Vesu</span>
+                  <span class="rank">#1 in Surat</span>
                 </div>
               </div>
             </div>
 
-            <div class="axis-row">
-              <div class="axis-label"><span class="name">🍴 Food</span><span class="val">9</span></div>
-              <div class="axis-track"><div class="axis-fill food" data-width="96%"></div></div>
-            </div>
-            <div class="axis-row">
-              <div class="axis-label"><span class="name">🪴 Ambiance</span><span class="val">8</span></div>
-              <div class="axis-track"><div class="axis-fill amb" data-width="88%"></div></div>
-            </div>
-            <div class="axis-row">
-              <div class="axis-label"><span class="name">📸 Presentation</span><span class="val">9</span></div>
-              <div class="axis-track"><div class="axis-fill pres" data-width="94%"></div></div>
+            <!-- Comparison UI mockup -->
+            <div class="comparison-ui">
+              <p class="comparison-prompt">Which did you enjoy more?</p>
+              <div class="vs-row">
+                <button class="vs-btn vs-btn--winner">Zero</button>
+                <span class="vs-label">VS</span>
+                <button class="vs-btn">Nomads</button>
+              </div>
+              <div class="rank-result">
+                <span class="rank-tick">✓</span>
+                <span>Zero <strong>#1</strong> in your list</span>
+              </div>
+              <p class="rank-context">Right ahead of Nomads · Community ELO updated</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Gamification / badges -->
+      <!-- Leaderboards + Gamification -->
       <section class="levelup">
         <div class="section-head reveal">
-          <span class="eyebrow">✦ Level up</span>
-          <h2 class="section-title">Every review makes you <span class="accent">a legend.</span></h2>
-          <p class="section-sub">Earn XP, keep your weekly streak alive, and unlock badges as you explore more of Surat.</p>
+          <span class="eyebrow">✦ Leaderboards</span>
+          <h2 class="section-title levelup-title">One city. Two <span class="accent">leaderboards.</span></h2>
+          <p class="section-sub">Restaurants ranked by ELO. Foodies ranked by XP. Both earned — nothing bought.</p>
         </div>
-        
-        <!-- Playful Geometric Cards -->
+
+        <!-- Two Leaderboards Side by Side -->
+        <div class="leaderboards-grid reveal">
+
+          <!-- Restaurant Leaderboard -->
+          <div class="leaderboard-card">
+            <div class="lb-tabs">
+              <button class="lb-tab lb-tab--active">🍽 Restaurants</button>
+              <button class="lb-tab">☕ Cafes</button>
+            </div>
+            <div class="lb-list">
+              <div class="lb-row lb-row--gold">
+                <div class="lb-rank">1</div>
+                <div class="lb-info">
+                  <strong>Honest Thali</strong>
+                  <span>Gujarati · Nanpura</span>
+                </div>
+                <div class="lb-right">
+                  <div class="lb-bar-wrap"><div class="lb-bar" style="width:91%"></div></div>
+                  <span class="lb-score">9.1</span>
+                </div>
+              </div>
+              <div class="lb-row lb-row--silver">
+                <div class="lb-rank">2</div>
+                <div class="lb-info">
+                  <strong>Saffron Street Kitchen</strong>
+                  <span>Gujarati Thali · Adajan</span>
+                </div>
+                <div class="lb-right">
+                  <div class="lb-bar-wrap"><div class="lb-bar" style="width:86%"></div></div>
+                  <span class="lb-score">8.6</span>
+                </div>
+              </div>
+              <div class="lb-row lb-row--bronze">
+                <div class="lb-rank">3</div>
+                <div class="lb-info">
+                  <strong>Zaika Kitchen</strong>
+                  <span>North Indian · Vesu</span>
+                </div>
+                <div class="lb-right">
+                  <div class="lb-bar-wrap"><div class="lb-bar" style="width:81%"></div></div>
+                  <span class="lb-score">8.1</span>
+                </div>
+              </div>
+              <div class="lb-row">
+                <div class="lb-rank">4</div>
+                <div class="lb-info">
+                  <strong>Roman Dine</strong>
+                  <span>Multi-cuisine · Pal</span>
+                </div>
+                <div class="lb-right">
+                  <div class="lb-bar-wrap"><div class="lb-bar" style="width:76%"></div></div>
+                  <span class="lb-score">7.6</span>
+                </div>
+              </div>
+              <div class="lb-row lb-row--faded">
+                <div class="lb-rank">5</div>
+                <div class="lb-info">
+                  <strong>Sai Dining</strong>
+                  <span>Thali · Citylight</span>
+                </div>
+                <div class="lb-right">
+                  <div class="lb-bar-wrap"><div class="lb-bar" style="width:72%"></div></div>
+                  <span class="lb-score">7.2</span>
+                </div>
+              </div>
+            </div>
+            <div class="lb-footer">
+              ELO-based · 5+ comparisons from 3+ diners to appear
+            </div>
+          </div>
+
+          <!-- User / Foodie Leaderboard -->
+          <div class="leaderboard-card">
+            <div class="lb-tabs">
+              <button class="lb-tab lb-tab--active">🏆 Top Foodies</button>
+              <button class="lb-tab">📅 This Week</button>
+            </div>
+            <div class="lb-list">
+              <div class="lb-row lb-row--gold">
+                <div class="lb-rank">1</div>
+                <div class="lb-avatar" style="background:#8384FE">A</div>
+                <div class="lb-info">
+                  <strong>Arjun S.</strong>
+                  <span>12,840 XP</span>
+                </div>
+                <div class="lb-right">
+                  <span class="lb-level">Lv 42</span>
+                  <span class="lb-badge-icon">🧭</span>
+                </div>
+              </div>
+              <div class="lb-row lb-row--silver">
+                <div class="lb-rank">2</div>
+                <div class="lb-avatar" style="background:#F472B6">P</div>
+                <div class="lb-info">
+                  <strong>Priya M.</strong>
+                  <span>11,200 XP</span>
+                </div>
+                <div class="lb-right">
+                  <span class="lb-level">Lv 38</span>
+                  <span class="lb-badge-icon">📸</span>
+                </div>
+              </div>
+              <div class="lb-row lb-row--bronze">
+                <div class="lb-rank">3</div>
+                <div class="lb-avatar" style="background:#FBBF24">R</div>
+                <div class="lb-info">
+                  <strong>Rahul K.</strong>
+                  <span>9,750 XP</span>
+                </div>
+                <div class="lb-right">
+                  <span class="lb-level">Lv 35</span>
+                  <span class="lb-badge-icon">✍️</span>
+                </div>
+              </div>
+              <div class="lb-row">
+                <div class="lb-rank">4</div>
+                <div class="lb-avatar" style="background:#ABFFAA; color:#1A1A1A">S</div>
+                <div class="lb-info">
+                  <strong>Sneha P.</strong>
+                  <span>7,300 XP</span>
+                </div>
+                <div class="lb-right">
+                  <span class="lb-level">Lv 29</span>
+                  <span class="lb-badge-icon">🧭</span>
+                </div>
+              </div>
+              <div class="lb-row lb-row--faded">
+                <div class="lb-rank">5</div>
+                <div class="lb-avatar" style="background:#64748B">D</div>
+                <div class="lb-info">
+                  <strong>Dev A.</strong>
+                  <span>5,900 XP</span>
+                </div>
+                <div class="lb-right">
+                  <span class="lb-level">Lv 24</span>
+                  <span class="lb-badge-icon">📸</span>
+                </div>
+              </div>
+            </div>
+            <div class="lb-footer">
+              XP from visits, comparisons, photos &amp; notes
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Badges (secondary) -->
+        <div class="section-head reveal" style="margin-top: 3rem;">
+          <span class="eyebrow">✦ Earn your place</span>
+          <h3 class="badges-subhead">Rank more, <span class="accent">earn more.</span></h3>
+          <p class="section-sub">Every visit, photo, and note earns XP. Climb levels, keep your streak alive, and unlock badges as you explore Surat.</p>
+        </div>
+
         <div class="badges-grid">
           <div class="badge-card geometric-card reveal">
             <div class="geo-icon">🧭</div>
@@ -305,24 +485,111 @@
         </div>
       </section>
 
-      <!-- Stats band -->
-      <section class="stats">
-        <div class="stats-inner reveal">
-          <div class="stat-item">
-            <div class="stat-num"><span class="count" data-target="500">0</span>+</div>
-            <div class="stat-label">Verified restaurants</div>
+      <!-- Lists Section -->
+      <section class="lists-section features">
+        <div class="section-head reveal">
+          <span class="eyebrow">✦ Lists</span>
+          <h2 class="section-title">Your food story, <span class="accent">organized.</span></h2>
+          <p class="section-sub">Two kinds of lists — curated by the kuri team so you always have somewhere to go, and personal ones you build as you eat.</p>
+        </div>
+
+        <div class="lists-grid reveal">
+
+          <!-- Curated Lists -->
+          <div class="list-preview-card">
+            <div class="lp-header">
+              <span class="lp-eyebrow">🗂 Curated by kuri</span>
+              <p class="lp-desc">Hand-picked collections updated regularly by the kuri team.</p>
+            </div>
+            <div class="lp-items">
+              <div class="lp-row">
+                <span class="lp-emoji">🍛</span>
+                <div class="lp-row-info">
+                  <strong>Best Thalis in Surat</strong>
+                  <span>12 spots</span>
+                </div>
+                <span class="lp-arrow">→</span>
+              </div>
+              <div class="lp-row">
+                <span class="lp-emoji">🔥</span>
+                <div class="lp-row-info">
+                  <strong>Trending This Week</strong>
+                  <span>9 spots</span>
+                </div>
+                <span class="lp-arrow">→</span>
+              </div>
+              <div class="lp-row">
+                <span class="lp-emoji">💎</span>
+                <div class="lp-row-info">
+                  <strong>Hidden Gems of Adajan</strong>
+                  <span>8 spots</span>
+                </div>
+                <span class="lp-arrow">→</span>
+              </div>
+              <div class="lp-row lp-row--muted">
+                <span class="lp-emoji">🌅</span>
+                <div class="lp-row-info">
+                  <strong>Weekend Brunch Spots</strong>
+                  <span>6 spots</span>
+                </div>
+                <span class="lp-arrow">→</span>
+              </div>
+            </div>
           </div>
-          <div class="stat-item">
-            <div class="stat-num"><span class="count" data-target="12">0</span>K+</div>
-            <div class="stat-label">Community reviews</div>
+
+          <!-- Personal Lists -->
+          <div class="list-preview-card">
+            <div class="lp-header">
+              <span class="lp-eyebrow">👤 Your Lists</span>
+              <p class="lp-desc">Build your own lists as you visit, save, and explore the city.</p>
+            </div>
+            <div class="lp-items">
+              <div class="lp-row">
+                <span class="lp-emoji">✅</span>
+                <div class="lp-row-info">
+                  <strong>Places I've Been</strong>
+                  <span>47 visited</span>
+                </div>
+                <span class="lp-pill lp-pill--green">Visited</span>
+              </div>
+              <div class="lp-row">
+                <span class="lp-emoji">🔖</span>
+                <div class="lp-row-info">
+                  <strong>Want to Try</strong>
+                  <span>23 saved</span>
+                </div>
+                <span class="lp-pill lp-pill--purple">Saved</span>
+              </div>
+              <div class="lp-row">
+                <span class="lp-emoji">🕯️</span>
+                <div class="lp-row-info">
+                  <strong>Date Night Spots</strong>
+                  <span>8 places</span>
+                </div>
+                <span class="lp-pill lp-pill--pink">Custom</span>
+              </div>
+              <div class="lp-row lp-row--add">
+                <span class="lp-plus">+</span>
+                <span class="lp-add-label">Create a new list</span>
+              </div>
+            </div>
           </div>
-          <div class="stat-item">
-            <div class="stat-num"><span class="count" data-target="3">0</span></div>
-            <div class="stat-label">Scoring dimensions</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num"><span class="count" data-target="0">0</span>%</div>
-            <div class="stat-label">Paid placements</div>
+
+        </div>
+      </section>
+
+      <!-- Conclusion / Manifesto -->
+      <section class="manifesto features">
+        <div class="manifesto-inner reveal">
+          <span class="eyebrow">✦ The bottom line</span>
+          <h2 class="manifesto-headline">Food discovery in India is broken.<br><span class="manifesto-accent">Kuri fixes it.</span></h2>
+          <p class="manifesto-body">Google Reviews are a J-curve of anger and loyalty — gamed by free desserts, padded by fake accounts, and dominated by the loudest voices. The average means nothing. Kuri replaces the star with a question: <em>"which did you enjoy more?"</em> — and lets honest preference, repeated across the whole city, do the rest.</p>
+          <div class="manifesto-pills">
+            <span class="m-pill">✓ No stars</span>
+            <span class="m-pill">✓ ELO comparison ranking</span>
+            <span class="m-pill">✓ Restaurant &amp; foodie leaderboards</span>
+            <span class="m-pill">✓ Curated &amp; personal lists</span>
+            <span class="m-pill">✓ Zero paid placements</span>
           </div>
         </div>
       </section>
