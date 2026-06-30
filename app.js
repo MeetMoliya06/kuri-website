@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pts = steps.map((step) => {
       const r = step.getBoundingClientRect();
       const y = (r.top + scrollY) - sAbsTop + r.height / 2;
-      const x = step.dataset.side === 'left' ? W * 0.22 : W * 0.78;
+      const x = step.dataset.side === 'left' ? W * 0.30 : W * 0.70;
       return { x, y };
     });
 
@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         const prev = pts[i - 1];
         const gap = pt.y - prev.y;
-        const pull = gap * 0.45;
+        const pull = gap * 0.32;
         // CP1 pulls down from prev, CP2 pulls up into pt — creates smooth S
         d += ` C ${prev.x} ${prev.y + pull}, ${pt.x} ${pt.y - pull}, ${pt.x} ${pt.y}`;
       }
