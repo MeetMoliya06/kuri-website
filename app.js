@@ -183,6 +183,95 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // App Journey — reveal steps on scroll
+  document.querySelectorAll('.journey-step').forEach((step) => {
+    ScrollTrigger.create({
+      trigger: step,
+      start: 'top 72%',
+      once: true,
+      onEnter: () => step.classList.add('is-visible'),
+    });
+  });
+
+  // App Journey — dynamic SVG path, runs after load so image heights are final
+  function initJourneyPath() {
+    const journeyDesktop = document.querySelector('.journey-desktop');
+    const svgEl = document.getElementById('journeyPathSvg');
+    const pathEl = document.getElementById('journeyPath');
+    const steps = Array.from(document.querySelectorAll('.journey-desktop .journey-step'));
+
+    if (!journeyDesktop || !svgEl || !pathEl || !steps.length) return;
+
+    const scrollY = window.scrollY;
+    const sRect = journeyDesktop.getBoundingClientRect();
+    const W = sRect.width;
+    const H = sRect.height;
+    const sAbsTop = sRect.top + scrollY;
+
+    const pts = steps.map((step) => {
+      const r = step.getBoundingClientRect();
+      const y = (r.top + scrollY) - sAbsTop + r.height / 2;
+      const x = step.dataset.side === 'left' ? W * 0.32 : W * 0.68;
+      return { x, y };
+    });
+
+    const cx = W / 2;
+    let d = `M ${cx} 0`;
+
+    pts.forEach((pt, i) => {
+      if (i === 0) {
+        // Simple drop from center then curve to first waypoint
+        d += ` C ${cx} ${pt.y * 0.5}, ${pt.x} ${pt.y * 0.6}, ${pt.x} ${pt.y}`;
+      } else {
+        const prev = pts[i - 1];
+        const pull = (pt.y - prev.y) * 0.4;
+        d += ` C ${prev.x} ${prev.y + pull}, ${pt.x} ${pt.y - pull}, ${pt.x} ${pt.y}`;
+      }
+    });
+
+    const last = pts[pts.length - 1];
+    const tailPull = (H - last.y) * 0.5;
+    d += ` C ${last.x} ${last.y + tailPull}, ${cx} ${H - tailPull * 0.4}, ${cx} ${H}`;
+
+    svgEl.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    pathEl.setAttribute('d', d);
+
+    // Use setAttribute for SVG attrs — gsap.set is unreliable for stroke-dash* on SVG
+    const pathLen = pathEl.getTotalLength();
+    pathEl.setAttribute('stroke-dasharray', pathLen);
+    pathEl.setAttribute('stroke-dashoffset', pathLen);
+
+    gsap.to(pathEl, {
+      attr: { 'stroke-dashoffset': 0 },
+      ease: 'none',
+      scrollTrigger: {
+        trigger: journeyDesktop,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        scrub: 1,
+      }
+    });
+
+    ScrollTrigger.refresh();
+  }
+
+  // App Journey — mobile vertical line fill
+  const mobileLineFill = document.querySelector('.journey-mobile-line-fill');
+  const mobileJourney = document.querySelector('.journey-mobile');
+
+  if (mobileLineFill && mobileJourney) {
+    gsap.to(mobileLineFill, {
+      height: '100%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: mobileJourney,
+        start: 'top 80%',
+        end: 'bottom 60%',
+        scrub: 1,
+      }
+    });
+  }
+
   // Refresh once layout settles (fonts, mockup, etc.)
   ScrollTrigger.refresh();
 
@@ -227,9 +316,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Refresh heights when page is fully loaded (images, fonts, layout)
   window.addEventListener('load', () => {
-    if (lenis) {
-      lenis.resize();
-    }
+    if (lenis) lenis.resize();
+    initJourneyPath();
     ScrollTrigger.refresh();
   });
 
