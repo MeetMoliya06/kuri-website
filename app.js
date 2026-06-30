@@ -268,9 +268,9 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: 'none',
       scrollTrigger: {
         trigger: firstMobileStep,
-        start: 'top center',
+        start: 'top 80%',
         endTrigger: lastMobileStep,
-        end: 'bottom center',
+        end: 'bottom 20%',
         scrub: true,
       }
     });
