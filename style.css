@@ -1544,7 +1544,7 @@ body {
    MANIFESTO / CONCLUSION
    ========================================================================== */
 .manifesto-inner {
-  max-width: 1100px;
+  max-width: 100%;
   margin: 0 auto;
   background: var(--geo-fg);
   border-radius: 28px;
@@ -1661,9 +1661,12 @@ body {
   box-sizing: border-box;
 }
 
-/* Fix CTA padding since the parent is now controlling the width */
+/* Fix CTA + manifesto padding since the parent is now controlling the width */
 .cta-band {
   padding: 0 !important;
+}
+.manifesto.features {
+  padding: 80px 0 !important;
 }
 .cta-inner {
   border-radius: 28px; 
