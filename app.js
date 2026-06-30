@@ -259,14 +259,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileLineFill = document.querySelector('.journey-mobile-line-fill');
   const mobileJourney = document.querySelector('.journey-mobile');
 
-  if (mobileLineFill) {
+  const firstMobileStep = document.querySelector('.journey-mobile-step');
+  const lastMobileStep = document.querySelector('.journey-mobile-step:last-child');
+
+  if (mobileLineFill && firstMobileStep && lastMobileStep) {
     gsap.to(mobileLineFill, {
       height: '100%',
       ease: 'none',
       scrollTrigger: {
-        trigger: '.journey',
-        start: 'top 60%',
-        end: 'bottom 40%',
+        trigger: firstMobileStep,
+        start: 'top center',
+        endTrigger: lastMobileStep,
+        end: 'bottom center',
         scrub: true,
       }
     });
