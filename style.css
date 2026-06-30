@@ -1544,7 +1544,7 @@ body {
    MANIFESTO / CONCLUSION
    ========================================================================== */
 .manifesto-inner {
-  max-width: 1100px;
+  max-width: 100%;
   margin: 0 auto;
   background: var(--geo-fg);
   border-radius: 28px;
