@@ -193,8 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // App Journey — dynamic SVG path built from actual DOM positions
-  // Run after window load so images have settled and layout is final
+  // App Journey — dynamic SVG path, runs after load so image heights are final
   function initJourneyPath() {
     const journeyDesktop = document.querySelector('.journey-desktop');
     const svgEl = document.getElementById('journeyPathSvg');
@@ -209,8 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const H = sRect.height;
     const sAbsTop = sRect.top + scrollY;
 
-    // Build waypoints at each step's vertical center,
-    // x leaning toward whichever side the phone is on
+    // Waypoints: x toward phone side, y at each step's vertical center
     const pts = steps.map((step) => {
       const r = step.getBoundingClientRect();
       const y = (r.top + scrollY) - sAbsTop + r.height / 2;
@@ -218,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return { x, y };
     });
 
-    // Build smooth cubic bezier path through waypoints
+    // Smooth S-curve through every waypoint
     let d = `M ${W / 2} 0`;
     pts.forEach((pt, i) => {
       if (i === 0) {
@@ -235,13 +233,16 @@ document.addEventListener("DOMContentLoaded", () => {
     svgEl.setAttribute('viewBox', `0 0 ${W} ${H}`);
     pathEl.setAttribute('d', d);
 
+    // Use setAttribute for SVG attrs — gsap.set is unreliable for stroke-dash* on SVG
     const pathLen = pathEl.getTotalLength();
-    gsap.set(pathEl, { strokeDasharray: pathLen, strokeDashoffset: pathLen });
+    pathEl.setAttribute('stroke-dasharray', pathLen);
+    pathEl.setAttribute('stroke-dashoffset', pathLen);
 
     const lastStep = steps[steps.length - 1];
 
+    // Animate via GSAP attr:{} — the correct way to tween SVG presentation attributes
     gsap.to(pathEl, {
-      strokeDashoffset: 0,
+      attr: { 'stroke-dashoffset': 0 },
       ease: 'none',
       scrollTrigger: {
         trigger: journeyDesktop,
