@@ -208,27 +208,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const H = sRect.height;
     const sAbsTop = sRect.top + scrollY;
 
-    // Waypoints: x toward phone side, y at each step's vertical center
+    // Waypoints: push x wide so the path has room to swing dramatically
     const pts = steps.map((step) => {
       const r = step.getBoundingClientRect();
       const y = (r.top + scrollY) - sAbsTop + r.height / 2;
-      const x = step.dataset.side === 'left' ? W * 0.35 : W * 0.65;
+      const x = step.dataset.side === 'left' ? W * 0.22 : W * 0.78;
       return { x, y };
     });
 
-    // Smooth S-curve through every waypoint
+    // Flowing S-curves: each handle stays vertically close to its own anchor,
+    // so the path lingers on one side before sweeping across — much more organic
     let d = `M ${W / 2} 0`;
     pts.forEach((pt, i) => {
       if (i === 0) {
-        d += ` C ${W / 2} ${pt.y * 0.35}, ${pt.x} ${pt.y * 0.75}, ${pt.x} ${pt.y}`;
+        const gap = pt.y;
+        d += ` C ${W / 2} ${gap * 0.25}, ${pt.x} ${pt.y - gap * 0.25}, ${pt.x} ${pt.y}`;
       } else {
         const prev = pts[i - 1];
-        const midY = (prev.y + pt.y) / 2;
-        d += ` C ${prev.x} ${midY}, ${pt.x} ${midY}, ${pt.x} ${pt.y}`;
+        const gap = pt.y - prev.y;
+        const pull = gap * 0.45;
+        // CP1 pulls down from prev, CP2 pulls up into pt — creates smooth S
+        d += ` C ${prev.x} ${prev.y + pull}, ${pt.x} ${pt.y - pull}, ${pt.x} ${pt.y}`;
       }
     });
     const last = pts[pts.length - 1];
-    d += ` C ${last.x} ${H * 0.96}, ${W / 2} ${H * 0.99}, ${W / 2} ${H}`;
+    const tailGap = H - last.y;
+    d += ` C ${last.x} ${last.y + tailGap * 0.4}, ${W / 2} ${H - tailGap * 0.2}, ${W / 2} ${H}`;
 
     svgEl.setAttribute('viewBox', `0 0 ${W} ${H}`);
     pathEl.setAttribute('d', d);
