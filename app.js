@@ -211,34 +211,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const pts = steps.map((step) => {
       const r = step.getBoundingClientRect();
       const y = (r.top + scrollY) - sAbsTop + r.height / 2;
-      const x = step.dataset.side === 'left' ? W * 0.28 : W * 0.72;
+      const x = step.dataset.side === 'left' ? W * 0.32 : W * 0.68;
       return { x, y };
     });
 
-    let d = `M ${W / 2} 0`;
+    const cx = W / 2;
+    let d = `M ${cx} 0`;
 
     pts.forEach((pt, i) => {
       if (i === 0) {
-        const gap = pt.y;
-        // CP1 leans to the OPPOSITE side of where we're going —
-        // this creates a wide graceful sweep instead of a straight dive
-        const leanX = pt.x < W / 2 ? W * 0.72 : W * 0.28;
-        d += ` C ${leanX} ${gap * 0.1}, ${pt.x} ${pt.y - gap * 0.22}, ${pt.x} ${pt.y}`;
+        // Simple drop from center then curve to first waypoint
+        d += ` C ${cx} ${pt.y * 0.5}, ${pt.x} ${pt.y * 0.6}, ${pt.x} ${pt.y}`;
       } else {
         const prev = pts[i - 1];
-        const gap = pt.y - prev.y;
-        const pull = gap * 0.36;
+        const pull = (pt.y - prev.y) * 0.4;
         d += ` C ${prev.x} ${prev.y + pull}, ${pt.x} ${pt.y - pull}, ${pt.x} ${pt.y}`;
       }
-      // Decorative circle loop at each waypoint — path lassos the dot then continues
-      const lr = 24;
-      const sweep = pt.x < W / 2 ? 0 : 1;
-      d += ` a ${lr} ${lr} 0 1 ${sweep} 0.01 0`;
     });
 
     const last = pts[pts.length - 1];
-    const tailGap = H - last.y;
-    d += ` C ${last.x} ${last.y + tailGap * 0.4}, ${W / 2} ${H - tailGap * 0.2}, ${W / 2} ${H}`;
+    const tailPull = (H - last.y) * 0.5;
+    d += ` C ${last.x} ${last.y + tailPull}, ${cx} ${H - tailPull * 0.4}, ${cx} ${H}`;
 
     svgEl.setAttribute('viewBox', `0 0 ${W} ${H}`);
     pathEl.setAttribute('d', d);

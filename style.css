@@ -2035,10 +2035,10 @@ img {
   justify-content: space-between;
   gap: 2rem;
   max-width: 900px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 0;
   position: relative;
   z-index: 1;
-  padding: 3rem 0;
+  padding: 6rem 0;
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.7s ease, transform 0.7s ease;
