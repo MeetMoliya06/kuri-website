@@ -241,20 +241,18 @@ document.addEventListener("DOMContentLoaded", () => {
     pathEl.setAttribute('stroke-dasharray', pathLen);
     pathEl.setAttribute('stroke-dashoffset', pathLen);
 
-    const lastStep = steps[steps.length - 1];
-
-    // Animate via GSAP attr:{} — the correct way to tween SVG presentation attributes
     gsap.to(pathEl, {
       attr: { 'stroke-dashoffset': 0 },
       ease: 'none',
       scrollTrigger: {
         trigger: journeyDesktop,
-        start: 'top 85%',
-        endTrigger: lastStep,
-        end: 'center 55%',
+        start: 'top 80%',
+        end: 'bottom 20%',
         scrub: 1,
       }
     });
+
+    ScrollTrigger.refresh();
   }
 
   // App Journey — mobile vertical line fill
