@@ -1661,9 +1661,11 @@ body {
   box-sizing: border-box;
 }
 
-/* Fix CTA padding since the parent is now controlling the width */
-.cta-band {
-  padding: 0 !important;
+/* Fix CTA + manifesto padding since the parent is now controlling the width */
+.cta-band,
+.manifesto.features {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 .cta-inner {
   border-radius: 28px; 
