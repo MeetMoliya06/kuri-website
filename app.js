@@ -259,14 +259,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobileLineFill = document.querySelector('.journey-mobile-line-fill');
   const mobileJourney = document.querySelector('.journey-mobile');
 
-  if (mobileLineFill && mobileJourney) {
+  if (mobileLineFill) {
     gsap.to(mobileLineFill, {
       height: '100%',
       ease: 'none',
       scrollTrigger: {
-        trigger: mobileJourney,
-        start: 'top 85%',
-        end: 'bottom 15%',
+        trigger: '.journey',
+        start: 'top 60%',
+        end: 'bottom 40%',
         scrub: true,
       }
     });
