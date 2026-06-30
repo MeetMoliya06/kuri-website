@@ -183,6 +183,54 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // App Journey Section — SVG path draw + step reveals (desktop)
+  const journeySection = document.querySelector('.journey-desktop');
+  const journeyPath = document.getElementById('journeyPath');
+
+  if (journeySection && journeyPath) {
+    const pathLength = journeyPath.getTotalLength();
+    journeyPath.style.strokeDasharray = pathLength;
+    journeyPath.style.strokeDashoffset = pathLength;
+
+    gsap.to(journeyPath, {
+      strokeDashoffset: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: journeySection,
+        start: 'top 80%',
+        end: 'bottom 20%',
+        scrub: 1,
+      }
+    });
+
+    // Reveal each step as scroll reaches it
+    document.querySelectorAll('.journey-step').forEach((step) => {
+      ScrollTrigger.create({
+        trigger: step,
+        start: 'top 70%',
+        once: true,
+        onEnter: () => step.classList.add('is-visible'),
+      });
+    });
+  }
+
+  // App Journey — mobile vertical line fill
+  const mobileLineFill = document.querySelector('.journey-mobile-line-fill');
+  const mobileJourney = document.querySelector('.journey-mobile');
+
+  if (mobileLineFill && mobileJourney) {
+    gsap.to(mobileLineFill, {
+      height: '100%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: mobileJourney,
+        start: 'top 80%',
+        end: 'bottom 60%',
+        scrub: 1,
+      }
+    });
+  }
+
   // Refresh once layout settles (fonts, mockup, etc.)
   ScrollTrigger.refresh();
 
