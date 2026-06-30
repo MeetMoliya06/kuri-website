@@ -183,34 +183,73 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // App Journey Section — SVG path draw + step reveals (desktop)
-  const journeySection = document.querySelector('.journey-desktop');
-  const journeyPath = document.getElementById('journeyPath');
+  // App Journey — reveal steps on scroll
+  document.querySelectorAll('.journey-step').forEach((step) => {
+    ScrollTrigger.create({
+      trigger: step,
+      start: 'top 72%',
+      once: true,
+      onEnter: () => step.classList.add('is-visible'),
+    });
+  });
 
-  if (journeySection && journeyPath) {
-    const pathLength = journeyPath.getTotalLength();
-    journeyPath.style.strokeDasharray = pathLength;
-    journeyPath.style.strokeDashoffset = pathLength;
+  // App Journey — dynamic SVG path built from actual DOM positions
+  // Run after window load so images have settled and layout is final
+  function initJourneyPath() {
+    const journeyDesktop = document.querySelector('.journey-desktop');
+    const svgEl = document.getElementById('journeyPathSvg');
+    const pathEl = document.getElementById('journeyPath');
+    const steps = Array.from(document.querySelectorAll('.journey-desktop .journey-step'));
 
-    gsap.to(journeyPath, {
+    if (!journeyDesktop || !svgEl || !pathEl || !steps.length) return;
+
+    const scrollY = window.scrollY;
+    const sRect = journeyDesktop.getBoundingClientRect();
+    const W = sRect.width;
+    const H = sRect.height;
+    const sAbsTop = sRect.top + scrollY;
+
+    // Build waypoints at each step's vertical center,
+    // x leaning toward whichever side the phone is on
+    const pts = steps.map((step) => {
+      const r = step.getBoundingClientRect();
+      const y = (r.top + scrollY) - sAbsTop + r.height / 2;
+      const x = step.dataset.side === 'left' ? W * 0.35 : W * 0.65;
+      return { x, y };
+    });
+
+    // Build smooth cubic bezier path through waypoints
+    let d = `M ${W / 2} 0`;
+    pts.forEach((pt, i) => {
+      if (i === 0) {
+        d += ` C ${W / 2} ${pt.y * 0.35}, ${pt.x} ${pt.y * 0.75}, ${pt.x} ${pt.y}`;
+      } else {
+        const prev = pts[i - 1];
+        const midY = (prev.y + pt.y) / 2;
+        d += ` C ${prev.x} ${midY}, ${pt.x} ${midY}, ${pt.x} ${pt.y}`;
+      }
+    });
+    const last = pts[pts.length - 1];
+    d += ` C ${last.x} ${H * 0.96}, ${W / 2} ${H * 0.99}, ${W / 2} ${H}`;
+
+    svgEl.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    pathEl.setAttribute('d', d);
+
+    const pathLen = pathEl.getTotalLength();
+    gsap.set(pathEl, { strokeDasharray: pathLen, strokeDashoffset: pathLen });
+
+    const lastStep = steps[steps.length - 1];
+
+    gsap.to(pathEl, {
       strokeDashoffset: 0,
       ease: 'none',
       scrollTrigger: {
-        trigger: journeySection,
-        start: 'top 90%',
-        end: 'bottom 10%',
-        scrub: 1.5,
+        trigger: journeyDesktop,
+        start: 'top 85%',
+        endTrigger: lastStep,
+        end: 'center 55%',
+        scrub: 1,
       }
-    });
-
-    // Reveal each step as scroll reaches it
-    document.querySelectorAll('.journey-step').forEach((step) => {
-      ScrollTrigger.create({
-        trigger: step,
-        start: 'top 70%',
-        once: true,
-        onEnter: () => step.classList.add('is-visible'),
-      });
     });
   }
 
@@ -275,9 +314,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Refresh heights when page is fully loaded (images, fonts, layout)
   window.addEventListener('load', () => {
-    if (lenis) {
-      lenis.resize();
-    }
+    if (lenis) lenis.resize();
+    initJourneyPath();
     ScrollTrigger.refresh();
   });
 

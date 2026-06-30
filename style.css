@@ -2026,20 +2026,19 @@ img {
 }
 
 #journeyPath {
-  stroke-dasharray: 5000;
-  stroke-dashoffset: 5000;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .journey-step {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto 2rem;
   position: relative;
   z-index: 1;
-  min-height: 520px;
-  margin-bottom: 2rem;
+  padding: 3rem 0;
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.7s ease, transform 0.7s ease;
@@ -2051,8 +2050,8 @@ img {
 }
 
 .journey-phone {
-  flex: 0 0 260px;
-  max-width: 260px;
+  flex: 0 0 300px;
+  max-width: 300px;
   position: relative;
   /* slight tilt matching hero energy */
   transform: rotate(2.5deg);
@@ -2111,15 +2110,14 @@ img {
 }
 
 .journey-dot {
-  flex: 0 0 20px;
-  width: 20px;
-  height: 20px;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: var(--purple);
   box-shadow: 0 0 0 5px rgba(131, 132, 254, 0.2);
   position: relative;
   z-index: 2;
-  margin: 0 auto;
   align-self: center;
   opacity: 0;
   transform: scale(0);
@@ -2133,35 +2131,30 @@ img {
 
 .journey-text {
   flex: 1;
-  max-width: 380px;
-  padding: 0 3rem;
-}
-
-.journey-text[style] {
-  text-align: right;
+  padding: 0 2rem;
 }
 
 .journey-num {
   display: inline-block;
   font-family: var(--font-display);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: var(--purple);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.6rem;
 }
 
 .journey-text h3 {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 800;
   color: var(--ink);
-  margin-bottom: 0.75rem;
-  line-height: 1.2;
+  margin-bottom: 0.8rem;
+  line-height: 1.15;
 }
 
 .journey-text p {
-  font-size: 1rem;
+  font-size: 1.05rem;
   color: var(--c-text-muted);
   line-height: 1.65;
 }
