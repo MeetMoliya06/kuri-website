@@ -208,29 +208,34 @@ document.addEventListener("DOMContentLoaded", () => {
     const H = sRect.height;
     const sAbsTop = sRect.top + scrollY;
 
-    // Waypoints: push x wide so the path has room to swing dramatically
     const pts = steps.map((step) => {
       const r = step.getBoundingClientRect();
       const y = (r.top + scrollY) - sAbsTop + r.height / 2;
-      const x = step.dataset.side === 'left' ? W * 0.30 : W * 0.70;
+      const x = step.dataset.side === 'left' ? W * 0.28 : W * 0.72;
       return { x, y };
     });
 
-    // Flowing S-curves: each handle stays vertically close to its own anchor,
-    // so the path lingers on one side before sweeping across — much more organic
     let d = `M ${W / 2} 0`;
+
     pts.forEach((pt, i) => {
       if (i === 0) {
         const gap = pt.y;
-        d += ` C ${W / 2} ${gap * 0.25}, ${pt.x} ${pt.y - gap * 0.25}, ${pt.x} ${pt.y}`;
+        // CP1 leans to the OPPOSITE side of where we're going —
+        // this creates a wide graceful sweep instead of a straight dive
+        const leanX = pt.x < W / 2 ? W * 0.72 : W * 0.28;
+        d += ` C ${leanX} ${gap * 0.1}, ${pt.x} ${pt.y - gap * 0.22}, ${pt.x} ${pt.y}`;
       } else {
         const prev = pts[i - 1];
         const gap = pt.y - prev.y;
-        const pull = gap * 0.32;
-        // CP1 pulls down from prev, CP2 pulls up into pt — creates smooth S
+        const pull = gap * 0.36;
         d += ` C ${prev.x} ${prev.y + pull}, ${pt.x} ${pt.y - pull}, ${pt.x} ${pt.y}`;
       }
+      // Decorative circle loop at each waypoint — path lassos the dot then continues
+      const lr = 24;
+      const sweep = pt.x < W / 2 ? 0 : 1;
+      d += ` a ${lr} ${lr} 0 1 ${sweep} 0.01 0`;
     });
+
     const last = pts[pts.length - 1];
     const tailGap = H - last.y;
     d += ` C ${last.x} ${last.y + tailGap * 0.4}, ${W / 2} ${H - tailGap * 0.2}, ${W / 2} ${H}`;
