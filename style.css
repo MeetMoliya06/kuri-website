@@ -1662,10 +1662,11 @@ body {
 }
 
 /* Fix CTA + manifesto padding since the parent is now controlling the width */
-.cta-band,
+.cta-band {
+  padding: 0 !important;
+}
 .manifesto.features {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  padding: 80px 0 !important;
 }
 .cta-inner {
   border-radius: 28px; 
