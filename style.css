@@ -2045,24 +2045,12 @@ img {
   color: #fff;
 }
 
+.journey .section-title .accent {
+  color: var(--mint);
+}
+
 .journey .section-sub {
   color: rgba(233, 234, 255, 0.6);
-}
-
-.journey .eyebrow {
-  color: var(--mint);
-}
-
-.journey-text h3 {
-  color: #fff;
-}
-
-.journey-text p {
-  color: rgba(233, 234, 255, 0.6);
-}
-
-.journey-num {
-  color: var(--mint);
 }
 
 /* ---- Desktop Layout ---- */
@@ -2201,7 +2189,7 @@ img {
   font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.12em;
-  color: var(--purple);
+  color: var(--mint);
   margin-bottom: 0.6rem;
 }
 
@@ -2209,14 +2197,14 @@ img {
   font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 800;
-  color: var(--ink);
+  color: #fff;
   margin-bottom: 0.8rem;
   line-height: 1.15;
 }
 
 .journey-text p {
   font-size: 1.05rem;
-  color: var(--c-text-muted);
+  color: rgba(233, 234, 255, 0.6);
   line-height: 1.65;
 }
 
