@@ -265,9 +265,9 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: 'none',
       scrollTrigger: {
         trigger: mobileJourney,
-        start: 'top 80%',
-        end: 'bottom 60%',
-        scrub: 1,
+        start: 'top 85%',
+        end: 'bottom 15%',
+        scrub: true,
       }
     });
   }
