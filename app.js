@@ -197,9 +197,9 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: 'none',
       scrollTrigger: {
         trigger: journeySection,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        scrub: 1,
+        start: 'top 90%',
+        end: 'bottom 10%',
+        scrub: 1.5,
       }
     });
 
