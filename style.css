@@ -1668,6 +1668,9 @@ body {
   padding: 0 !important;
   margin: 3.5rem auto !important; /* Balanced vertical margin outside the cards */
 }
+.manifesto.features {
+  padding: 80px 0 !important;
+}
 .cta-inner {
   border-radius: 28px; 
 }
