@@ -202,6 +202,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!journeyDesktop || !svgEl || !pathEl || !steps.length) return;
 
+    // Clean up existing ScrollTrigger to avoid duplicates
+    const existing = ScrollTrigger.getById('desktopJourneyTrigger');
+    if (existing) {
+      existing.kill();
+    }
+
     const scrollY = window.scrollY;
     const sRect = journeyDesktop.getBoundingClientRect();
     const W = sRect.width;
@@ -241,43 +247,79 @@ document.addEventListener("DOMContentLoaded", () => {
     pathEl.setAttribute('stroke-dasharray', pathLen);
     pathEl.setAttribute('stroke-dashoffset', pathLen);
 
+    gsap.killTweensOf(pathEl);
     gsap.to(pathEl, {
       attr: { 'stroke-dashoffset': 0 },
       ease: 'none',
       scrollTrigger: {
+        id: 'desktopJourneyTrigger',
         trigger: journeyDesktop,
         start: 'top 80%',
         end: 'bottom 20%',
         scrub: 1,
+        invalidateOnRefresh: true,
       }
     });
-
-    ScrollTrigger.refresh();
   }
 
   // App Journey — mobile vertical line fill
-  const mobileLineFill = document.querySelector('.journey-mobile-line-fill');
-  const mobileJourney = document.querySelector('.journey-mobile');
+  function initMobileJourney() {
+    const mobileLineFill = document.querySelector('.journey-mobile-line-fill');
+    const mobileLine = document.querySelector('.journey-mobile-line');
+    const mobileJourney = document.querySelector('.journey-mobile');
+    const firstMobileStep = document.querySelector('.journey-mobile-step');
+    const lastMobileStep = document.querySelector('.journey-mobile-step:last-child');
 
-  const firstMobileStep = document.querySelector('.journey-mobile-step');
-  const lastMobileStep = document.querySelector('.journey-mobile-step:last-child');
+    if (!mobileLineFill || !mobileLine || !mobileJourney || !firstMobileStep || !lastMobileStep) return;
 
-  if (mobileLineFill && firstMobileStep && lastMobileStep) {
+    const firstDot = firstMobileStep.querySelector('.journey-mobile-dot');
+    const lastDot = lastMobileStep.querySelector('.journey-mobile-dot');
+
+    if (!firstDot || !lastDot) return;
+
+    // Clean up existing ScrollTrigger to avoid duplicates
+    const existing = ScrollTrigger.getById('mobileJourneyTrigger');
+    if (existing) {
+      existing.kill();
+    }
+
+    // Calculate center of dots relative to .journey-mobile container
+    // Using offsetTop and heights is layout-stable (unaffected by CSS reveals translateY)
+    const firstDotCenter = firstMobileStep.offsetTop + firstDot.offsetTop + (firstDot.offsetHeight / 2 || 7);
+    const lastDotCenter = lastMobileStep.offsetTop + lastDot.offsetTop + (lastDot.offsetHeight / 2 || 7);
+
+    // Position and size the timeline line exactly between the centers of first and last dot
+    mobileLine.style.top = `${firstDotCenter}px`;
+    mobileLine.style.bottom = 'auto';
+    mobileLine.style.height = `${lastDotCenter - firstDotCenter}px`;
+
+    gsap.killTweensOf(mobileLineFill);
+    gsap.set(mobileLineFill, { height: '0%' });
+
     gsap.to(mobileLineFill, {
       height: '100%',
       ease: 'none',
       scrollTrigger: {
+        id: 'mobileJourneyTrigger',
         trigger: firstMobileStep,
-        start: 'top 80%',
+        start: 'top+=15 60%',
         endTrigger: lastMobileStep,
-        end: 'bottom 20%',
-        scrub: true,
+        end: 'top+=15 60%',
+        scrub: 0.5,
+        invalidateOnRefresh: true,
       }
     });
   }
 
-  // Refresh once layout settles (fonts, mockup, etc.)
-  ScrollTrigger.refresh();
+  // Initialize journey layout paths and line triggers
+  initJourneyPath();
+  initMobileJourney();
+
+  // Handle resizing of journey layouts dynamically
+  window.addEventListener('resize', () => {
+    initJourneyPath();
+    initMobileJourney();
+  });
 
   // Mobile Menu Toggle Logic
   const hamburger = document.querySelector('.hamburger');
@@ -322,6 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener('load', () => {
     if (lenis) lenis.resize();
     initJourneyPath();
+    initMobileJourney();
     ScrollTrigger.refresh();
   });
 
